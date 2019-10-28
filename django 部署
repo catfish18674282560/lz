@@ -1,0 +1,55 @@
+django 部署
+
+1，安装apache
+apt-get install python3-pip
+pip3 install django
+
+apt-get install apache2
+apt-get install libapache2-mod-wsgi-py3
+
+
+2，编译mod_wsgi
+
+下载编译安装包：apt-get install apache2-dev     ! => apt-get update
+安装python包： apt-get install python3-dev
+wget https://github.com/GrahamDumpleton/mod_wsgi/archive/4.6.5.tar.gz
+tar xvfz 4.6.5.tar.gz
+查找替换路径：whereis apxs  &&  lswhereis python
+cd mod_wsgi-4.6.6 
+./configure --with-apxs=路径 --with-python=/usr/bin/python3.6
+make
+make install
++--------------------------+
+| 验证安装：                 |
+| cd /etc/apache2/          | 
+| ls mods-enabled/          |
+| 看是否有个wsgi.conf        |
+| 如果没有，启用：a2enmod wsgi|
++--------------------------+
+
+3,配置
+
+cd etc/apache2/sites-available/
+vim mysite.conf
++------------------------------------+ # 配置有问题
+<VirtualHost *:80>
+    WSGIDaemonProcess blog python-path=/home/ubuntu/blog
+    WSGIProcessGroup blog
+	WSGIScriptAlias / /home/blog/blog/wsgi.py
+	<Directory /home/ubuntu/blog/blog>            # 路径写的找不到会报错403
+		<Files wsgi.py>
+			Require all granted
+		</Files>
+	</Directory>
+
+</VirtualHost>
++------------------------------------+  # 500错误，修改wsgi.py文件
+cd /etc/apache2/sites-enabled/          # 静态文件
+a2ensite mysite.conf              
+a2dissite 000-default.conf
+apache2ctl restart
+
+# 无法登陆后台
+(当前目录)chmod 777 db.sqlite3
+cd ..
+chmod 777 *

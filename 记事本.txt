@@ -1,0 +1,62 @@
+deb文件的安装： sudo dpkg -i + 文件名称
+gedit 文件名    打开文件，在root模式打开可以解决权限问题
+pwd
+pip3 install -i https://pypi.douban.com/simple 文件名      pip安装库
+tar -zxvf 文件名      gz后缀文件的安装
+tar xvf  +文件名      xz后缀的文件的安装 
+tar -xvf             tar后缀文件的安装
+python -m pip install --upgrade pip   安装pip命令
+
+*-解决下载速度过慢问题
+sudo cp /etc/apt/sources.list /etc/apt/sources.list.backup            #备份当前也就是默认官方的源列表
+sudo gedit /etc/apt/sources.list                                      #修改sources.list文件中源的列表，删除全部内容，替换为国内源地址。 保存编辑好的文件。
+sudo apt-get update                                                   #更新源列表，换源后必须执行
+rm 删除文件   sudo rm -rf 目录
+
+解决docker超时问题：
+curl -sSL https://get.daocloud.io/daotools/set_mirror.sh | sh -s http://f1361db2.m.daocloud.io
+service docker restart;
+
+.tar.gz     格式解压为          tar   -zxvf   xx.tar.gz
+.tar.bz2    格式解压为          tar   -jxvf    xx.tar.bz2
+
+linux配置环境变量
+export PATH=/你的路径/tools:$PATH
+export PATH=/你的路径/platform-tools:$PATH
+source /etc/profile
+
+#cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc_language
+mkdir filename    create the foddler
+ls                render all files in this dictory
+> filename        create a file
+#aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+[scrapyd]
+eggs_dir    = eggs
+logs_dir    = logs
+items_dir   =
+jobs_to_keep = 5
+dbs_dir     = dbs
+max_proc    = 0
+max_proc_per_cpu = 4
+finished_to_keep = 100
+poll_interval = 5.0
+bind_address = 127.0.0.1
+http_port   = 6800
+debug       = off
+runner      = scrapyd.runner
+application = scrapyd.app.application
+launcher    = scrapyd.launcher.Launcher
+webroot     = scrapyd.website.Root
+
+[services]
+schedule.json     = scrapyd.webservice.Schedule
+cancel.json       = scrapyd.webservice.Cancel
+addversion.json   = scrapyd.webservice.AddVersion
+listprojects.json = scrapyd.webservice.ListProjects
+listversions.json = scrapyd.webservice.ListVersions
+listspiders.json  = scrapyd.webservice.ListSpiders
+delproject.json   = scrapyd.webservice.DeleteProject
+delversion.json   = scrapyd.webservice.DeleteVersion
+listjobs.json     = scrapyd.webservice.ListJobs
+daemonstatus.json = scrapyd.webservice.DaemonStatus
+
